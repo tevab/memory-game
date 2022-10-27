@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const StyledWrapper = styled.div`
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90vh;
     max-width: 56vh;
     margin: 0 auto;
     display: grid;

@@ -1,0 +1,43 @@
+import React from "react";
+import { useStopwatch } from "react-timer-hook";
+import { useEffect } from "react";
+
+function Timer(props) {
+
+    const {
+        seconds,
+        minutes,
+        hours,
+        days,
+        isRunning,
+        start,
+        pause,
+        reset,
+      } = useStopwatch({ autoStart: false });
+
+        const hourTime = hours < 10 ? `0${hours}` : `${hours}`;
+        const minuteTime = minutes < 10 ? `0${minutes}` : `${minutes}`;
+        const secondTime = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+    useEffect(() => {
+        if (props.start && !props.end) {
+            start();
+        } else if (props.end && !props.start) {
+            pause();
+        } else {
+            return;
+        }
+    }, [props.start, props.end]); 
+
+    return(
+        <>
+        <span>{hourTime}</span>
+        :
+        <span>{minuteTime}</span>
+        :
+        <span>{secondTime}</span>
+        </>
+    );
+};
+
+export default Timer;

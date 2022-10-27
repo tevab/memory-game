@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useEffect } from "react";
 
 const StyledCard = styled.div`
-    background-color: ${props => props.isActive ? 'red' : 'yellow'};
+    background-color: ${props => props.isActive ? '#ffd4eb' : '#e12e4b'};
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -13,7 +13,9 @@ const StyledCard = styled.div`
     transition: all 200ms ease-in-out;
     width: 100%;
     transform: ${props => props.isActive ? 'rotateY(0deg)' : 'rotateY(180deg)'};
-    // color: ${props => props.isActive ? 'black' : 'transparent'};
+    // color: ${props => props.isActive ? '#e12e4b' : 'transparent'};
+    font-size: 8vw;
+    cursor: pointer;
 `;
 
 function Card(props) {
