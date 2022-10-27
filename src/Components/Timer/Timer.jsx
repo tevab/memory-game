@@ -8,8 +8,6 @@ function Timer(props) {
         seconds,
         minutes,
         hours,
-        days,
-        isRunning,
         start,
         pause,
         reset,

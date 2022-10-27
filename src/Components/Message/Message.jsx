@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
+import Button from "../Button/Button";
 
 const MessageContainer = styled.div`
     position: absolute;
@@ -31,12 +32,13 @@ function Message(props) {
 
     const handleClick = () => {
         setVisible(false);
+        props.setBeginMessage(false);
         if (props.showMessage) {
             setTimeout(() => {
                 props.setShowMessage(false);
                 props.setStart(true);
                 props.setEnd(false);
-            }, 400);
+            }, 400);  
         } else {
             setTimeout(() => {
                 props.setShowMessage(false);
@@ -50,11 +52,13 @@ function Message(props) {
             visible={visible}
         >
             {props.message ? props.message : 'hello'}
-            <button
-                onClick={handleClick}
-            >
-               {props.showMessage ? 'Start' : !props.showMessage && props.start ? 'Continue' : 'Restart'}
-            </button>
+            {(props.beginMessage || props.end) && (
+                <Button 
+                handleClick={handleClick}
+                value={props.showMessage ? 'Start' : 'Restart'}
+                setRestart={props.setRestart}
+            />
+            )}
         </MessageContainer>
         
     )
