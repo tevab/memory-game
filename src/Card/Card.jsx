@@ -4,12 +4,17 @@ import { useState, useRef } from "react";
 import { useEffect } from "react";
 
 const StyledCard = styled.div`
-        background-color: ${props => props.isActive ? 'red' : 'yellow'};
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    `;
+    background-color: ${props => props.isActive ? 'red' : 'yellow'};
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 200ms ease-in-out;
+    z-index: 1;
+    transform: ${props => props.isActive ? 'rotateY(0deg)' : 'rotateY(180deg)'};
+    color: ${props => props.isActive ? 'black' : 'transparent'};
+`;
 
 function Card(props) {
 
@@ -23,7 +28,7 @@ function Card(props) {
             setActive(true);
             if (props.cardOne === '') {
                 props.setCardOne(props.text);
-            } else {
+            } else if (!isActive) {
                 props.setCardTwo(props.text);
                 props.setDisabled(true);
             };
