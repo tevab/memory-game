@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const StyledCard = styled.div`
-    background-color: red;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
+        background-color: ${props => props.isActive ? 'red' : 'yellow'};
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
 
 function Card(props) {
 
@@ -16,11 +16,15 @@ function Card(props) {
 
     const handleClick = e => {
         setActive(true);
-        props.countCards();
+        if (props.cardOne === '') {
+            props.setCardOne(props.text);
+        } else {
+            props.setCardTwo(props.text);
+        };;
     }
 
     return (
-        <StyledCard onClick={handleClick}>
+        <StyledCard onClick={handleClick} isActive={isActive}>
             {props.text}
         </ StyledCard>
     );

@@ -69,25 +69,16 @@ function Wrapper(props) {
         },
     ];
 
-    let [clicks, setClicks] = useState(0);
-
-    const countCards = () => {
-        setClicks(prevCount => prevCount + 1);
-    };
-
-    useEffect(() => {
-        if (clicks > 1) {
-            setClicks(0);
-        }
-    });
-
     return (
       <StyledWrapper>
        {cards.map((card, i) => (
           <Card 
             key={i} 
             text={card.name}
-            countCards={countCards}
+            cardOne={props.cardOne}
+            setCardOne={props.setCardOne}
+            cardTwo={props.cardTwo}
+            setCardTwo={props.setCardTwo}
           />))}
       </StyledWrapper>
     );
