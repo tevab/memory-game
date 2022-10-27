@@ -15,16 +15,21 @@ function Card(props) {
     const [isActive, setActive] = useState(false);
 
     const handleClick = e => {
-        setActive(true);
-        if (props.cardOne === '') {
-            props.setCardOne(props.text);
+            if (!props.disabled) {
+            setActive(true);
+            if (props.cardOne === '') {
+                props.setCardOne(props.text);
+            } else {
+                props.setCardTwo(props.text);
+                props.setDisabled(true);
+            };
         } else {
-            props.setCardTwo(props.text);
-        };;
-    }
+            return;
+        };
+    };
 
     return (
-        <StyledCard onClick={handleClick} isActive={isActive}>
+        <StyledCard onClick={handleClick} isActive={isActive} disabled={props.disabled}>
             {props.text}
         </ StyledCard>
     );

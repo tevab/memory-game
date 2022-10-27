@@ -18,6 +18,8 @@ const StyledWrapper = styled.div`
 
 function Wrapper(props) { 
 
+    const [disabled, setDisabled] = useState(false);
+
     const cards = [
         {
             id: 0,
@@ -79,6 +81,8 @@ function Wrapper(props) {
             setCardOne={props.setCardOne}
             cardTwo={props.cardTwo}
             setCardTwo={props.setCardTwo}
+            disabled={disabled}
+            setDisabled={setDisabled}
           />))}
       </StyledWrapper>
     );
