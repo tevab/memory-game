@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../Card/Card";
 import styled from "styled-components";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const StyledWrapper = styled.div`
     width: 100vw;
@@ -18,6 +19,7 @@ const StyledWrapper = styled.div`
 function Wrapper(props) { 
 
     const [disabled, setDisabled] = useState(false);
+    const [shuffledCards, setShuffledCards] = useState([]);
 
     const cards = [
         {
@@ -70,14 +72,19 @@ function Wrapper(props) {
         },
     ];
 
+    useEffect(() => {
+        const shuffle = cards.sort(() => 0.5 - Math.random());
+        setShuffledCards(shuffle)
+    }, []);
+
     return (
       <StyledWrapper>
-       {cards.map((card, i) => (
+       {shuffledCards.map((card, i) => (
           <Card 
             key={i} 
             id={card.id}
             text={card.name}
-            cards={cards[i]}
+            cards={shuffledCards[i]}
             cardOne={props.cardOne}
             setCardOne={props.setCardOne}
             cardTwo={props.cardTwo}
