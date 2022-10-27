@@ -28,6 +28,7 @@ function Card(props) {
         };
     };
 
+
     return (
         <StyledCard onClick={handleClick} isActive={isActive} disabled={props.disabled}>
             {props.text}

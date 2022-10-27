@@ -2,7 +2,6 @@ import React from "react";
 import Card from "../Card/Card";
 import styled from "styled-components";
 import { useState } from "react";
-import { useEffect } from "react";
 
 const StyledWrapper = styled.div`
     width: 100vw;
