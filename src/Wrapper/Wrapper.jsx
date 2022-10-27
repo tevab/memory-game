@@ -91,6 +91,8 @@ function Wrapper(props) {
             setCardTwo={props.setCardTwo}
             disabled={disabled}
             setDisabled={setDisabled}
+            clearedCards={props.clearedCards}
+            setClearedCards={props.setClearedCards}
             message={props.message}
             setMessage={props.setMessage}
           />))}

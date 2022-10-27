@@ -11,9 +11,9 @@ const StyledCard = styled.div`
     justify-content: center;
     position: relative;
     transition: all 200ms ease-in-out;
-    z-index: 1;
+    width: 100%;
     transform: ${props => props.isActive ? 'rotateY(0deg)' : 'rotateY(180deg)'};
-    color: ${props => props.isActive ? 'black' : 'transparent'};
+    // color: ${props => props.isActive ? 'black' : 'transparent'};
 `;
 
 function Card(props) {
@@ -46,6 +46,7 @@ function Card(props) {
                 reset(); 
                 if (props.text === props.cardOne && props.cardOne === props.cardTwo) {
                     setVisible(false);
+                    props.setClearedCards([...props.clearedCards, props.cardOne])
                 }
              }, 4000);
         }
@@ -61,18 +62,25 @@ function Card(props) {
 
 
     return (
-        <StyledCard 
-            onClick={handleClick} 
-            isActive={isActive} 
-            message={props.message} 
-            disabled={props.disabled}
-            visible={visible}
-            style={{
-                opacity: visible ? 1 : 0,
-            }}
-        >
-            {props.text}
-        </ StyledCard>
+        <div style={{
+            display: 'flex',
+            alignContent: 'stretch',
+            alignItems: 'stretch',
+        }}>
+            <StyledCard 
+                onClick={handleClick} 
+                isActive={isActive} 
+                message={props.message} 
+                disabled={props.disabled}
+                visible={visible}
+                style={{
+                    display: visible ? 'flex' : 'none',
+                }}
+                className='card'
+            >
+                {props.text}
+            </ StyledCard>
+        </div>
     );
 };
 

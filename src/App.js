@@ -6,6 +6,7 @@ function App() {
   const [cardOne, setCardOne] = useState('');
   const [cardTwo, setCardTwo] = useState('');
   const [message, setMessage] = useState('');
+  const [clearedCards, setClearedCards] = useState([]);
 
   useEffect (() => {
     if (cardTwo !== '' && cardOne === cardTwo) {
@@ -15,6 +16,14 @@ function App() {
     };
   }, [cardTwo])
 
+  useEffect(() => {
+    if (clearedCards.length >= 6) {
+      setMessage('good job!');
+    } else {
+      return;
+    }
+  });
+
   return (
     <>
       {message}
@@ -23,6 +32,8 @@ function App() {
         setCardOne={setCardOne}
         cardTwo={cardTwo}
         setCardTwo={setCardTwo}
+        clearedCards={clearedCards}
+        setClearedCards={setClearedCards}
         message={message}
         setMessage={setMessage}
       />
