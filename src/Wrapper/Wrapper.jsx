@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "../Card/Card";
 import styled from "styled-components";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const StyledWrapper = styled.div`
     width: 100vw;
@@ -14,7 +16,7 @@ const StyledWrapper = styled.div`
     grid-row-gap: 20px;
 `;
 
-function Wrapper() {
+function Wrapper(props) { 
 
     const cards = [
         {
@@ -65,7 +67,19 @@ function Wrapper() {
             id: 11,
             name: '%',
         },
-      ];
+    ];
+
+    let [clicks, setClicks] = useState(0);
+
+    const countCards = () => {
+        setClicks(prevCount => prevCount + 1);
+    };
+
+    useEffect(() => {
+        if (clicks > 1) {
+            setClicks(0);
+        }
+    });
 
     return (
       <StyledWrapper>
@@ -73,6 +87,7 @@ function Wrapper() {
           <Card 
             key={i} 
             text={card.name}
+            countCards={countCards}
           />))}
       </StyledWrapper>
     );
