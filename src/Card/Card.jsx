@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useEffect } from "react";
 
 const StyledCard = styled.div`
         background-color: ${props => props.isActive ? 'red' : 'yellow'};
@@ -13,9 +14,12 @@ const StyledCard = styled.div`
 function Card(props) {
 
     const [isActive, setActive] = useState(false);
+    const [visible, setVisible] = useState(true);
+
+    const initialLoad = useRef(true);
 
     const handleClick = e => {
-            if (!props.disabled) {
+        if (!props.disabled) {
             setActive(true);
             if (props.cardOne === '') {
                 props.setCardOne(props.text);
@@ -28,9 +32,40 @@ function Card(props) {
         };
     };
 
+    useEffect(() => {
+        if (initialLoad.current) {
+          initialLoad.current = false
+          return;
+        } else if (props.cardTwo !== '') {
+            setTimeout(() => {
+                reset(); 
+                if (props.text === props.cardOne && props.cardOne === props.cardTwo) {
+                    setVisible(false);
+                }
+             }, 4000);
+        }
+    }, [props.message]);
+
+    const reset = () => {
+        props.setCardOne('');
+        props.setCardTwo('');
+        props.setDisabled(false);
+        props.setMessage('');
+        setActive(false);
+    }
+
 
     return (
-        <StyledCard onClick={handleClick} isActive={isActive} disabled={props.disabled}>
+        <StyledCard 
+            onClick={handleClick} 
+            isActive={isActive} 
+            message={props.message} 
+            disabled={props.disabled}
+            visible={visible}
+            style={{
+                opacity: visible ? 1 : 0,
+            }}
+        >
             {props.text}
         </ StyledCard>
     );

@@ -75,13 +75,17 @@ function Wrapper(props) {
        {cards.map((card, i) => (
           <Card 
             key={i} 
+            id={card.id}
             text={card.name}
+            cards={cards[i]}
             cardOne={props.cardOne}
             setCardOne={props.setCardOne}
             cardTwo={props.cardTwo}
             setCardTwo={props.setCardTwo}
             disabled={disabled}
             setDisabled={setDisabled}
+            message={props.message}
+            setMessage={props.setMessage}
           />))}
       </StyledWrapper>
     );

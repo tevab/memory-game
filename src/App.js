@@ -23,6 +23,8 @@ function App() {
         setCardOne={setCardOne}
         cardTwo={cardTwo}
         setCardTwo={setCardTwo}
+        message={message}
+        setMessage={setMessage}
       />
     </>
   );
