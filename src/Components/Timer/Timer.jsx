@@ -22,19 +22,21 @@ function Timer(props) {
             start();
         } else if (props.end && !props.start) {
             pause();
+            let timerData = document.getElementById('timer').innerText;
+            props.setTimer(timerData)
         } else {
             return;
         }
     }, [props.start, props.end]); 
 
     return(
-        <>
-        <span>{hourTime}</span>
-        :
-        <span>{minuteTime}</span>
-        :
-        <span>{secondTime}</span>
-        </>
+        <div id='timer'>
+            <span>{hourTime}</span>
+            :
+            <span>{minuteTime}</span>
+            :
+            <span>{secondTime}</span>
+        </div>
     );
 };
 

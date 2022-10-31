@@ -1,8 +1,13 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import styled from "styled-components";
-import Button from "../Button/Button";
+import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import Button from '../Button/Button';
+import {finishMessage, startMessage, successMessage, failMessage} from '../../Helpers/Messages'
+import Lottie from 'lottie-react';
+import Confetti from '../../Animations/Confetti.json';
+import Rain from '../../Animations/Rain.json';
+import Win from '../../Animations/Win.json';
 
 const MessageContainer = styled.div`
     position: absolute;
@@ -18,6 +23,24 @@ const MessageContainer = styled.div`
     font-size: 40px;
     transition: all 400ms ease-in-out;
     opacity: ${props => props.visible ? 1 : 0};
+    color: #f7e4f3;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(54 8 8 / 66%);
+        z-index: -1;
+    }
+`;
+
+const StyledButton = styled(Button)`
+    border-radius: 12px;
+    border: 0;
+    padding: 10 28;
+    background-color: blue;
 `;
 
 function Message(props) {
@@ -32,18 +55,20 @@ function Message(props) {
 
     const handleClick = () => {
         setVisible(false);
-        props.setBeginMessage(false);
-        if (props.showMessage) {
-            setTimeout(() => {
-                props.setShowMessage(false);
-                props.setStart(true);
-                props.setEnd(false);
-            }, 400);  
-        } else {
-            setTimeout(() => {
-                props.setShowMessage(false);
-            }, 400);
-        };
+        setTimeout(() => {
+            props.setShowMessage(false);
+            props.setStart(true);
+            props.setEnd(false);
+            props.setBeginMessage(false);
+        }, 400);  
+    };
+
+    const TimerText = () => {
+        return (
+            <div style={{fontSize: 18, letterSpacing: 0.4}}>
+                You finished the game in {props.timer}
+            </div>
+        );
     };
 
     return (
@@ -51,14 +76,41 @@ function Message(props) {
             showMessage={props.showMessage}
             visible={visible}
         >
-            {props.message ? props.message : 'hello'}
+            <Lottie 
+                animationData={
+                    props.message === successMessage ? Confetti 
+                    : 
+                    props.message === failMessage ? Rain 
+                    : 
+                    props.message === finishMessage ? Win
+                    :
+                    null
+                } 
+                loop={true} 
+                style={{
+                    position: 'absolute',
+                    zIndex: 0,
+                }} 
+            />
+            <div 
+                style={{
+                    position: 'absolute', 
+                    zIndex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                }}
+            >
+            {props.message ? props.message : startMessage}
+            {props.timer ? <TimerText /> : null}
             {(props.beginMessage || props.end) && (
-                <Button 
+                <StyledButton 
                 handleClick={handleClick}
                 value={props.showMessage ? 'Start' : 'Restart'}
-                setRestart={props.setRestart}
             />
             )}
+            </div>
         </MessageContainer>
         
     )

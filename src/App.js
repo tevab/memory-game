@@ -3,10 +3,11 @@ import GlobalStyle from './Theme/globalStyle';
 import Wrapper from "./Components/Wrapper/Wrapper";
 import Message from "./Components/Message/Message";
 import Timer from "./Components/Timer/Timer";
+import {successMessage, failMessage, finishMessage} from './Helpers/Messages'
 
 function App() {
 
-  const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState(true);
   const [beginMessage, setBeginMessage] = useState(true);
   const [start, setStart] = useState(false);
   const [end, setEnd] = useState(false);
@@ -14,30 +15,25 @@ function App() {
   const [cardTwo, setCardTwo] = useState('');
   const [message, setMessage] = useState('');
   const [clearedCards, setClearedCards] = useState([]);
-  const [restart, setRestart] = useState(false);
-
-  useEffect(() => {
-    setShowMessage(true);
-  }, []);
+  const [timer, setTimer] = useState('');
 
   useEffect(() => {
     if (cardTwo !== '' && cardOne === cardTwo) {
       if (clearedCards.length >= 5) {
-        setMessage('good job!');
+        setMessage(finishMessage);
         setStart(false);
         setEnd(true);
       } else {
-        setMessage('yay');
+        setMessage(successMessage);
       }
     } else if (cardTwo !== '' && cardOne !== cardTwo) {
-      setMessage('boo');
+      setMessage(failMessage);
     };
   }, [cardTwo])
 
   return (
     <>
       <GlobalStyle
-        showMessage={showMessage}
         message={message}
         end={end}
       />
@@ -50,9 +46,9 @@ function App() {
           message={message}
           start={start}
           end={end}
-          setRestart={setRestart}
           beginMessage={beginMessage}
           setBeginMessage={setBeginMessage}
+          timer={timer}
         />
       )}
       <Wrapper
@@ -68,6 +64,7 @@ function App() {
       <Timer
         start={start}
         end={end}
+        setTimer={setTimer}
       />
     </>
   );
