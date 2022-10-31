@@ -15,8 +15,12 @@ const StyledCard = styled.div`
     width: 100%;
     transform: ${props => props.isActive ? 'rotateY(0deg)' : 'rotateY(180deg)'};
     // color: ${props => props.isActive ? '#e12e4b' : 'transparent'};
-    font-size: 8vw;
+    font-size: 6vh;
     cursor: pointer;
+    box-shadow: 0px 10px 34px 0px rgba(150,46,57,0.27);
+    &:hover {
+        background-color: ${props => props.isActive ? null : '#cf2b45'};
+    }
 `;
 
 function Card(props) {

@@ -36,13 +36,6 @@ const MessageContainer = styled.div`
     }
 `;
 
-const StyledButton = styled(Button)`
-    border-radius: 12px;
-    border: 0;
-    padding: 10 28;
-    background-color: blue;
-`;
-
 function Message(props) {
 
     const [visible, setVisible] = useState(false);
@@ -105,10 +98,10 @@ function Message(props) {
             {props.message ? props.message : startMessage}
             {props.timer ? <TimerText /> : null}
             {(props.beginMessage || props.end) && (
-                <StyledButton 
-                handleClick={handleClick}
-                value={props.showMessage ? 'Start' : 'Restart'}
-            />
+                <Button 
+                    handleClick={handleClick}
+                    value={`${props.showMessage ? 'Start' : 'Restart'} Game`}
+                />
             )}
             </div>
         </MessageContainer>

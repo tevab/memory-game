@@ -30,7 +30,10 @@ function Timer(props) {
     }, [props.start, props.end]); 
 
     return(
-        <div id='timer'>
+        <div 
+        id='timer'
+        style={{display: 'block', margin: '12px auto', textAlign: 'center'}}
+        >
             <span>{hourTime}</span>
             :
             <span>{minuteTime}</span>

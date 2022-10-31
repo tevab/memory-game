@@ -6,9 +6,9 @@ import { useEffect } from "react";
 
 const StyledWrapper = styled.div`
     width: 90vw;
-    height: 90vh;
+    height: 80vh;
     max-width: 56vh;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 1fr);
