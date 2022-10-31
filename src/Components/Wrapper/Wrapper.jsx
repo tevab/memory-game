@@ -1,8 +1,7 @@
 import React from "react";
 import Card from "../Card/Card";
 import styled from "styled-components";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const StyledWrapper = styled.div`
     width: 90vw;
@@ -20,6 +19,8 @@ function Wrapper(props) {
 
     const [disabled, setDisabled] = useState(false);
     const [shuffledCards, setShuffledCards] = useState([]);
+
+    const initialLoad = useRef(true);
 
     const cards = [
         {
@@ -72,10 +73,22 @@ function Wrapper(props) {
         },
     ];
 
-    useEffect(() => {
+    const shuffleCards = () => {
         const shuffle = cards.sort(() => 0.5 - Math.random());
         setShuffledCards(shuffle)
+    }
+
+    useEffect(() => {
+        shuffleCards();
     }, []);
+
+    useEffect(() => {
+        if (props.clearedCards.length > 0) {
+            props.setClearedCards([])
+        } else {
+            return;
+        }
+    }, [props.reset]);
 
     return (
       <StyledWrapper>
@@ -95,6 +108,8 @@ function Wrapper(props) {
             setClearedCards={props.setClearedCards}
             message={props.message}
             setMessage={props.setMessage}
+            reset={props.reset}
+            beginningMessage={props.beginningMessage}
           />))}
       </StyledWrapper>
     );

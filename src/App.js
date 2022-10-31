@@ -16,6 +16,7 @@ function App() {
   const [message, setMessage] = useState('');
   const [clearedCards, setClearedCards] = useState([]);
   const [timer, setTimer] = useState('');
+  const [reset, setReset] = useState(false);
 
   useEffect(() => {
     if (cardTwo !== '' && cardOne === cardTwo) {
@@ -43,15 +44,20 @@ function App() {
           setShowMessage={setShowMessage}
           setStart={setStart}
           setEnd={setEnd}
+          setMessage={setMessage}
           message={message}
           start={start}
           end={end}
           beginMessage={beginMessage}
           setBeginMessage={setBeginMessage}
           timer={timer}
+          setReset={setReset}
+          reset={reset}
+          setClearedCards={setClearedCards}
         />
       )}
       <Wrapper
+        beginningMessage={beginMessage}
         cardOne={cardOne}
         setCardOne={setCardOne}
         cardTwo={cardTwo}
@@ -60,11 +66,13 @@ function App() {
         setClearedCards={setClearedCards}
         message={message}
         setMessage={setMessage}
+        reset={reset}
       />
       <Timer
         start={start}
         end={end}
         setTimer={setTimer}
+        reset={reset}
       />
     </>
   );

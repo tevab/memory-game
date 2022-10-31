@@ -47,13 +47,27 @@ function Message(props) {
     }, []);
 
     const handleClick = () => {
-        setVisible(false);
-        setTimeout(() => {
-            props.setShowMessage(false);
-            props.setStart(true);
+        if (props.end && !props.reset) {
+            console.log('end');
+            props.setReset(true);
+            props.setMessage(startMessage);
+            props.setShowMessage(true);
+            props.setBeginMessage(true);
             props.setEnd(false);
-            props.setBeginMessage(false);
-        }, 400);  
+            props.setStart(true);
+            return;
+        } else if (props.end && props.reset) {
+            props.setReset(true);
+        } else {
+            setVisible(false);
+            setTimeout(() => {
+                props.setShowMessage(false);
+                props.setStart(true);
+                props.setEnd(false);
+                props.setBeginMessage(false);
+                props.setReset(false)
+            }, 400); 
+        } 
     };
 
     const TimerText = () => {
@@ -96,7 +110,7 @@ function Message(props) {
                 }}
             >
             {props.message ? props.message : startMessage}
-            {props.timer ? <TimerText /> : null}
+            {props.timer && props.message === finishMessage ? <TimerText /> : null}
             {(props.beginMessage || props.end) && (
                 <Button 
                     handleClick={handleClick}

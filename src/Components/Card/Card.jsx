@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { finishMessage } from "../../Helpers/Messages";
 
 const StyledCard = styled.div`
-    background-color: ${props => props.isActive ? '#ffd4eb' : '#e12e4b'};
+    background-color: ${props => props.isActive && !props.reset ? '#ffd4eb' : '#e12e4b'};
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -13,13 +13,13 @@ const StyledCard = styled.div`
     position: relative;
     transition: all 200ms ease-in-out, opacity 600ms ease-in-out;
     width: 100%;
-    transform: ${props => props.isActive ? 'rotateY(0deg)' : 'rotateY(180deg)'};
-    // color: ${props => props.isActive ? '#e12e4b' : 'transparent'};
+    transform: ${props => props.isActive && !props.reset ? 'rotateY(0deg)' : 'rotateY(180deg)'};
+    // color: ${props => props.isActive && !props.reset ? '#e12e4b' : 'transparent'};
     font-size: 6vh;
     cursor: pointer;
     box-shadow: 0px 10px 34px 0px rgba(150,46,57,0.27);
     &:hover {
-        background-color: ${props => props.isActive ? null : '#cf2b45'};
+        background-color: ${props => props.isActive && !props.reset ? null : '#cf2b45'};
     }
 `;
 
@@ -50,16 +50,19 @@ function Card(props) {
           return;
         } else if (props.cardTwo !== '' && props.message !== finishMessage) {
             setTimeout(() => {
-                reset(); 
-                if (props.text === props.cardOne && props.cardOne === props.cardTwo) {
+                resetGame(); 
+                if (props.text === props.cardOne && props.cardOne === props.cardTwo && !props.reset) {
                     setVisible(false);
                     props.setClearedCards([...props.clearedCards, props.cardOne])
                 }
              }, 2000);
+        } else if (props.reset) {
+            resetGame(); 
+            setVisible(true);
         }
     }, [props.message]);
 
-    const reset = () => {
+    const resetGame = () => {
         props.setCardOne('');
         props.setCardTwo('');
         props.setDisabled(false);
