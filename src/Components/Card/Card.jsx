@@ -14,7 +14,7 @@ const StyledCard = styled.div`
     transition: all 200ms ease-in-out, opacity 600ms ease-in-out;
     width: 100%;
     transform: ${props => props.isActive && props.visible ? 'rotateY(0deg)' : 'rotateY(180deg)'};
-    // color: ${props => props.isActive && props.visible ? '#e12e4b' : 'transparent'};
+    color: ${props => props.isActive && props.visible ? '#6f1221' : 'transparent'};
     font-size: 6vh;
     cursor: pointer;
     box-shadow: 0px 10px 34px 0px rgba(150,46,57,0.27);
