@@ -58,6 +58,7 @@ function App() {
       )}
       <Wrapper
         beginningMessage={beginMessage}
+        setStart={setStart}
         cardOne={cardOne}
         setCardOne={setCardOne}
         cardTwo={cardTwo}
@@ -66,6 +67,7 @@ function App() {
         setClearedCards={setClearedCards}
         message={message}
         setMessage={setMessage}
+        setReset={setReset}
         reset={reset}
       />
       <Timer

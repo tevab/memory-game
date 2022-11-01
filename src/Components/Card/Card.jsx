@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { finishMessage } from "../../Helpers/Messages";
 
 const StyledCard = styled.div`
-    background-color: ${props => props.isActive && !props.reset ? '#ffd4eb' : '#e12e4b'};
+    background-color: ${props => props.isActive && props.visible ? '#ffd4eb' : '#e12e4b'};
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -13,13 +13,13 @@ const StyledCard = styled.div`
     position: relative;
     transition: all 200ms ease-in-out, opacity 600ms ease-in-out;
     width: 100%;
-    transform: ${props => props.isActive && !props.reset ? 'rotateY(0deg)' : 'rotateY(180deg)'};
-    // color: ${props => props.isActive && !props.reset ? '#e12e4b' : 'transparent'};
+    transform: ${props => props.isActive && props.visible ? 'rotateY(0deg)' : 'rotateY(180deg)'};
+    // color: ${props => props.isActive && props.visible ? '#e12e4b' : 'transparent'};
     font-size: 6vh;
     cursor: pointer;
     box-shadow: 0px 10px 34px 0px rgba(150,46,57,0.27);
     &:hover {
-        background-color: ${props => props.isActive && !props.reset ? null : '#cf2b45'};
+        background-color: ${props => props.isActive && props.visible ? null : '#cf2b45'};
     }
 `;
 
@@ -51,7 +51,7 @@ function Card(props) {
         } else if (props.cardTwo !== '' && props.message !== finishMessage) {
             setTimeout(() => {
                 resetGame(); 
-                if (props.text === props.cardOne && props.cardOne === props.cardTwo && !props.reset) {
+                if (props.text === props.cardOne && props.cardOne === props.cardTwo) {
                     setVisible(false);
                     props.setClearedCards([...props.clearedCards, props.cardOne])
                 }
@@ -59,8 +59,9 @@ function Card(props) {
         } else if (props.reset) {
             resetGame(); 
             setVisible(true);
+            props.setReset(false);
         }
-    }, [props.message]);
+    }, [props.message, props.reset]);
 
     const resetGame = () => {
         props.setCardOne('');

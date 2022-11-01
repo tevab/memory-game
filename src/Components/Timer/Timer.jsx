@@ -19,7 +19,7 @@ function Timer(props) {
 
     useEffect(() => {
         if (props.start && !props.end) {
-            reset();
+            start();
         } else if (props.end && !props.start) {
             pause();
             let timerData = document.getElementById('timer').innerText;
@@ -30,8 +30,10 @@ function Timer(props) {
     }, [props.start, props.end]); 
 
     useEffect(() => {
-        if (props.reset) {
+        if (!props.reset) {
             reset();
+            start();
+        } else {
             pause();
         }
     }, [props.reset]);
