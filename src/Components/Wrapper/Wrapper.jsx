@@ -19,7 +19,6 @@ function Wrapper(props) {
 
     const [disabled, setDisabled] = useState(false);
     const [shuffledCards, setShuffledCards] = useState([]);
-    // const [resetBoard, setResetBoard] = useState(false);
 
     const initialLoad = useRef(true);
 
@@ -88,7 +87,6 @@ function Wrapper(props) {
             props.setClearedCards([]);
             props.setReset(true);
             props.setStart(true);
-            // setResetBoard(true)
             shuffleCards();
         } else {
             return;
@@ -116,8 +114,6 @@ function Wrapper(props) {
             reset={props.reset}
             beginningMessage={props.beginningMessage}
             setReset={props.setReset}
-            // resetBoard={resetBoard}
-            // setResetBoard={setResetBoard}
           />))}
       </StyledWrapper>
     );

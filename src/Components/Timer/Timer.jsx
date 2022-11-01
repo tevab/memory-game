@@ -26,7 +26,6 @@ function Timer(props) {
             props.setTimer(timerData)
         } else if (!props.end && !props.start) {
             pause();
-            console.log('pause');
         } else {
             return;
         }
@@ -36,7 +35,6 @@ function Timer(props) {
         if (!props.reset && props.start) {
             reset();
             start();
-            console.log('test');
         } else {
             pause();
         }
