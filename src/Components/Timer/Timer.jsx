@@ -24,15 +24,19 @@ function Timer(props) {
             pause();
             let timerData = document.getElementById('timer').innerText;
             props.setTimer(timerData)
+        } else if (!props.end && !props.start) {
+            pause();
+            console.log('pause');
         } else {
             return;
         }
     }, [props.start, props.end]); 
 
     useEffect(() => {
-        if (!props.reset) {
+        if (!props.reset && props.start) {
             reset();
             start();
+            console.log('test');
         } else {
             pause();
         }
