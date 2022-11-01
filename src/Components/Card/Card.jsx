@@ -61,6 +61,7 @@ function Card(props) {
             setVisible(true);
             props.setReset(false);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.message, props.reset]);
 
     const resetGame = () => {

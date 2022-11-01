@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../Card/Card";
 import styled from "styled-components";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const StyledWrapper = styled.div`
     width: 90vw;
@@ -20,7 +20,6 @@ function Wrapper(props) {
     const [disabled, setDisabled] = useState(false);
     const [shuffledCards, setShuffledCards] = useState([]);
 
-    const initialLoad = useRef(true);
 
     const cards = [
         {
@@ -80,6 +79,7 @@ function Wrapper(props) {
 
     useEffect(() => {
         shuffleCards();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -91,6 +91,7 @@ function Wrapper(props) {
         } else {
             return;
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.reset]);
 
     return (

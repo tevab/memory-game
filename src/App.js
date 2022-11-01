@@ -30,7 +30,7 @@ function App() {
     } else if (cardTwo !== '' && cardOne !== cardTwo) {
       setMessage(failMessage);
     };
-  }, [cardTwo])
+  }, [cardOne, cardTwo, clearedCards.length])
 
   return (
     <>

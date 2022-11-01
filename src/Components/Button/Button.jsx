@@ -4,10 +4,10 @@ import styled from "styled-components";
 const StyledButton = styled.button`
         border-radius: 12px;
         border: 0;
-        padding: 14px 40px 12px 40px;
+        padding: 14px 40px;
         background-color: #ff3448;
-        font-size: 18px;
-        font-family: 'Merriweather', Arial, sans-serif;
+        font-size: 16px;
+        font-family: 'Merriweather Sans', Arial, sans-serif;
         margin-top: 24px;
         transition: all 200ms ease-in-out;
         cursor: pointer;

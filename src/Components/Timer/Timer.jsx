@@ -29,6 +29,7 @@ function Timer(props) {
         } else {
             return;
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.start, props.end]); 
 
     useEffect(() => {
@@ -38,6 +39,7 @@ function Timer(props) {
         } else {
             pause();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.reset]);
 
     return(
