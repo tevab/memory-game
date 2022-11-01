@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
  
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --doc-height: 100%;
+  }
   body {
     height: 100vh;
     margin: 0;
