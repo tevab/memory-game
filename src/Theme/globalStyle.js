@@ -1,8 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
  
 const GlobalStyle = createGlobalStyle`
-  :root {
-    --doc-height: 100%;
+  html, body {
+    overflow: hidden;
+    height: 100%;
   }
   body {
     height: 100vh;
@@ -15,6 +16,13 @@ const GlobalStyle = createGlobalStyle`
     background-color: #f1b3c6;
     font-family: 'Lora', Times, serif;
   }
+  #root{
+    position: fixed;
+    inset: 0;
+    overflow: auto;
+    display: grid;
+    place-items: center;
+}
 `;
  
 export default GlobalStyle;
