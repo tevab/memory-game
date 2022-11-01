@@ -24,7 +24,7 @@ function Button(props) {
 
     return (
         <StyledButton 
-            onClick={ props.handleClick}
+            onClick={props.handleClick}
         >
             {props.value}
         </StyledButton>

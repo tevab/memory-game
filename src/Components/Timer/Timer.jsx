@@ -18,12 +18,15 @@ function Timer(props) {
         const secondTime = seconds < 10 ? `0${seconds}` : `${seconds}`;
 
     useEffect(() => {
+        // If `start` is true and `end` is false - start stopwatch
         if (props.start && !props.end) {
             start();
+        // If `end` is true and `start` is false - pause stopwatch and set `timer` with the stopwatch's data
         } else if (props.end && !props.start) {
             pause();
             let timerData = document.getElementById('timer').innerText;
             props.setTimer(timerData)
+        // If `end` and `start` are false - pause stopwatch
         } else if (!props.end && !props.start) {
             pause();
         } else {
@@ -33,6 +36,7 @@ function Timer(props) {
     }, [props.start, props.end]); 
 
     useEffect(() => {
+        // If `reset` is false and `start is true - reset stop watch and start it again, if not just pasue it
         if (!props.reset && props.start) {
             reset();
             start();

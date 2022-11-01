@@ -72,16 +72,19 @@ function Wrapper(props) {
         },
     ];
 
+    // Randomize the order of the `cards` array and set the new order inside `shuffledCards`
     const shuffleCards = () => {
         const shuffle = cards.sort(() => 0.5 - Math.random());
         setShuffledCards(shuffle)
     }
 
+    // On page load run `shuffleCards()`
     useEffect(() => {
         shuffleCards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // On `reset` prop change make sure that the `clearedCards` is not empty, then empty the array, reset the game, start the game, and shuffle the cards
     useEffect(() => {
         if (props.clearedCards.length > 0) {
             props.setClearedCards([]);

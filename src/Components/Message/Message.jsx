@@ -40,6 +40,7 @@ function Message(props) {
 
     const [visible, setVisible] = useState(false);
 
+    // On component load fade visibility in for 200ms
     useEffect(() => {
         setTimeout(() => {
             setVisible(true);
@@ -47,6 +48,7 @@ function Message(props) {
     }, []);
 
     const handleClick = () => {
+        // If `beginMessage` is being displayed with `end` being true or false - set `start` to true and hide message
         if ((props.beginMessage && !props.end) || (props.end && props.beginMessage)) {
             props.setStart(true);
             setVisible(false);
@@ -54,6 +56,7 @@ function Message(props) {
                 props.setShowMessage(false);
                 props.setBeginMessage(false);
             }, 400);
+        // If `end` is true and `beginMessage` is false - hide message, reset the game, set `start` to true, and `end` to false
         } else if (props.end && !props.beginMessage) {
             setVisible(false);
             props.setReset(true);
@@ -76,6 +79,7 @@ function Message(props) {
             visible={visible}
         >
             <Lottie 
+                // Show different animations for different messages
                 animationData={
                     props.message === successMessage ? Confetti 
                     : 
@@ -101,8 +105,11 @@ function Message(props) {
                     textAlign: 'center',
                 }}
             >
+            {/* If there is a custom message - display it, if not - show `startMessage` */}
             {props.message ? props.message : startMessage}
+            {/* If `timer` is true and the message displayed is `finishMessage` - render <TimerText /> */}
             {props.timer && props.message === finishMessage ? <TimerText /> : null}
+            {/* If `beginMessage` or `end` are true while the message is displayed - show button */}
             {(props.beginMessage || props.end) && (
                 <Button 
                     handleClick={handleClick}
